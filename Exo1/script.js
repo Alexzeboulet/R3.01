@@ -62,8 +62,8 @@ else {
 
 */
 
-/* Exercice 8 */
+/* Exercice 8 
 
 var nombreBinaire = "10101011";
 var décimal = parseInt(nombreBinaire);
-document.write(nombreBinaire + " et sa version décimale " + décimal );
+document.write(nombreBinaire + " et sa version décimale " + décimal ); */

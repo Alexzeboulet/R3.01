@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #e0e0e0;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #00ffc8;
+    text-shadow: 0 0 10px #00ffc8;
+}
+
+button {
+    background-color: #1f1f1f;
+    border: 2px solid #00ffc8;
+    color: #00ffc8;
+    padding: 14px 28px;
+    margin: 12px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px #00ffc8;
+}
+
+button:hover {
+    background-color: #00ffc8;
+    color: #121212;
+    box-shadow: 0 0 15px #00ffc8, 0 0 30px #00ffc8;
+}
+
+#réinitialisation {
+    border-color: #ff0066;
+    color: #ff0066;
+    box-shadow: 0 0 8px #ff0066;
+}
+
+#réinitialisation:hover {
+    background-color: #ff0066;
+    color: #121212;
+    box-shadow: 0 0 15px #ff0066, 0 0 30px #ff0066;
+}
+
+p {
+    margin-top: 14px;
+    font-size: 1.2rem;
+}
+
+label {
+    font-weight: 700;
+}
+
+#victoire label {
+    color: #00ff94;
+}
+
+#défaite label {
+    color: #ff2972;
+}
+
+#égalité label {
+    color: #ffaa00;
+}
+
+@media (max-width: 500px) {
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    body {
+        padding: 20px 10px;
+    }
+}
