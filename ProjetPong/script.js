@@ -6,12 +6,16 @@ bouton.addEventListener('click', (event) => {
     restart();
 });
 
-document.addEventListener ('appuieClavier' , (event) => {
+document.addEventListener ('keydown' , (event) => {
     if(event.key === "ArrowLeft"){
-        x = x - 1;
+        if (joueur.x > 0) {
+            joueur.x -= 5;
+        }
     }
     else if (event.key === "ArrowRight"){
-        x = x + 1;
+        if (joueur.x + joueur.rayon < canvas.width) {
+            joueur.x += 5;
+        } 
     }
 });
 let secondLancement = false;
@@ -25,6 +29,8 @@ const balle ={
 const joueur ={
     x : 0.40 * canvas.width,  
     y : 0.95 * canvas.height,
+    rayon : canvas.width / 5,
+    taille : 10,
 }
 
 function restart(){
@@ -62,8 +68,11 @@ function dessineBalle(){
     if(balle.x + balle.dx > canvas.width-balle.taille || balle.x + balle.dx < balle.taille) {
         balle.dx = -balle.dx;
     }
-    if(balle.y + balle.dy > canvas.height-balle.taille || balle.y + balle.dy < balle.taille) {
+    if(balle.y + balle.dy < balle.taille || (balle.y + balle.taille > joueur.y - joueur.taille / 2) && (balle.x > joueur.x) && (balle.x < joueur.x + joueur.rayon)) {
         balle.dy = -balle.dy;
+    }
+    else if (balle.y + balle.dy > canvas.height-balle.taille) {
+        end();
     }
 
     balle.x += balle.dx;
@@ -75,7 +84,7 @@ function creationJoueur(){
     // création du joueur
     ctx.fillStyle = "blue";
     ctx.beginPath();
-    ctx.rect(joueur.x, joueur.y, canvas.width / 5, 10);
+    ctx.rect(joueur.x, joueur.y, joueur.rayon,joueur.taille);
     ctx.fill();
     ctx.closePath();
 }
@@ -89,4 +98,8 @@ function dessineTout(){
     dessineBalle();
     dessineJoueur();
     RafId = requestAnimationFrame(dessineTout);
+}
+
+function end(){
+    close();
 }
