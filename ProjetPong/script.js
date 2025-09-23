@@ -1,24 +1,33 @@
 const bouton = document.getElementById("start");
 const canvas = document.getElementById("gameplan");
 const ctx = canvas.getContext("2d");
+let leftPressed = false;
+let rightPressed = false;
+let secondLancement = false;
 
 bouton.addEventListener('click', (event) => {
     restart();
 });
 
-document.addEventListener ('keydown' , (event) => {
+
+
+document.addEventListener('keydown', (event) => {
     if(event.key === "ArrowLeft"){
-        if (joueur.x > 0) {
-            joueur.x -= 5;
-        }
+        leftPressed = true;
     }
     else if (event.key === "ArrowRight"){
-        if (joueur.x + joueur.rayon < canvas.width) {
-            joueur.x += 5;
-        } 
+        rightPressed = true;
     }
 });
-let secondLancement = false;
+
+document.addEventListener('keyup', (event) => {
+    if(event.key === "ArrowLeft"){
+        leftPressed = false;
+    }
+    else if (event.key === "ArrowRight"){
+        rightPressed = false;
+    }
+});
 const balle ={
     x : 0.5 * canvas.width ,
     y : 0.1 * canvas.height,
@@ -95,11 +104,18 @@ function dessineJoueur(){
 
 function dessineTout(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    if (leftPressed && joueur.x > 0) {
+        joueur.x -= 5;
+    }
+    if (rightPressed && joueur.x + joueur.rayon < canvas.width) {
+        joueur.x += 5;
+    }
     dessineBalle();
     dessineJoueur();
     RafId = requestAnimationFrame(dessineTout);
 }
 
 function end(){
+    // à faire car ferme juste la page
     close();
 }
