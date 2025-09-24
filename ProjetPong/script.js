@@ -4,11 +4,26 @@ const ctx = canvas.getContext("2d");
 let leftPressed = false;
 let rightPressed = false;
 let secondLancement = false;
+let id;
+let RafId;
 
 bouton.addEventListener('click', (event) => {
     restart();
 });
 
+document.getElementById("flecheGauche").addEventListener("mousedown", (event) => {
+    leftPressed = true
+});
+document.getElementById("flecheGauche").addEventListener("mouseup", (event) => {
+    leftPressed = false
+});
+
+document.getElementById("flecheDroite").addEventListener("mousedown", (event) => {
+    rightPressed = true
+});
+document.getElementById("flecheDroite").addEventListener("mouseup", (event) => {
+    rightPressed = false
+});
 
 
 document.addEventListener('keydown', (event) => {
@@ -32,8 +47,8 @@ const balle ={
     x : 0.5 * canvas.width ,
     y : 0.1 * canvas.height,
     taille : 10,
-    dx : 2,
-    dy : 2,
+    dx : Math.random() < 0.5 ? 2 : -2,
+    dy : Math.random() < 0.5 ? 2 : -2,
 };
 const joueur ={
     x : 0.40 * canvas.width,  
@@ -51,8 +66,8 @@ function restart(){
     }
     balle.x = 0.5 * canvas.width;
     balle.y = 0.1 * canvas.height;
-    balle.dx = 2;
-    balle.dy = 2;
+    balle.dx = Math.random() < 0.5 ? 2 : -2;
+    balle.dy = Math.random() < 0.5 ? 2 : -2;
 }
 
 function timer(){
@@ -60,7 +75,7 @@ function timer(){
     let score = parseInt(document.getElementById("Score").textContent);
     score = score + 1;
     document.getElementById("Score").textContent = score;
-    setTimeout(timer, 1000);
+    id = setTimeout(timer, 1000);
 }
 
 function creationBalle(){
@@ -78,10 +93,11 @@ function dessineBalle(){
         balle.dx = -balle.dx;
     }
     if(balle.y + balle.dy < balle.taille || (balle.y + balle.taille > joueur.y - joueur.taille / 2) && (balle.x > joueur.x) && (balle.x < joueur.x + joueur.rayon)) {
-        balle.dy = -balle.dy;
+        balle.dy = -balle.dy ;
     }
     else if (balle.y + balle.dy > canvas.height-balle.taille) {
         end();
+        return;
     }
 
     balle.x += balle.dx;
@@ -116,6 +132,6 @@ function dessineTout(){
 }
 
 function end(){
-    // à faire car ferme juste la page
-    close();
+    alert("Partie terminé, vous avez eu un score de : " + document.getElementById("Score").textContent);
+    location.reload(true);
 }

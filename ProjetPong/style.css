@@ -1,6 +1,15 @@
 canvas{
-    width: 500px;
-    height: 750px;
+    max-width: 500px;
+    width: 80%;
+    height: 80%;
+    max-height: 750px;
     background-color: black;
-
+    
 }
+
+body {
+    align-items: center;
+    flex-wrap: flex;
+    flex-direction: column;
+}
+
