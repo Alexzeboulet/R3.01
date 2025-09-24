@@ -66,8 +66,8 @@ function restart(){
     }
     balle.x = 0.5 * canvas.width;
     balle.y = 0.1 * canvas.height;
-    balle.dx = Math.random() < 0.5 ? 2 : -2;
-    balle.dy = Math.random() < 0.5 ? 2 : -2;
+    balle.dx = Math.random() < 0.5 ? 3 : -3;
+    balle.dy = Math.random() < 0.5 ? 3 : -3;
 }
 
 function timer(){
@@ -90,10 +90,12 @@ function creationBalle(){
 function dessineBalle(){
     creationBalle();
     if(balle.x + balle.dx > canvas.width-balle.taille || balle.x + balle.dx < balle.taille) {
-        balle.dx = -balle.dx;
+        balle.dx = -balle.dx + 0.5;
+        balle.dy = balle.dy * (Math.random() * (1.10 - 0.90) + 0.90);
     }
     if(balle.y + balle.dy < balle.taille || (balle.y + balle.taille > joueur.y - joueur.taille / 2) && (balle.x > joueur.x) && (balle.x < joueur.x + joueur.rayon)) {
-        balle.dy = -balle.dy ;
+        balle.dy = -balle.dy + 0.5 ;
+        balle.dx = balle.dx * (Math.random() * (1.10 - 0.90) + 0.90);
     }
     else if (balle.y + balle.dy > canvas.height-balle.taille) {
         end();
@@ -135,3 +137,6 @@ function end(){
     alert("Partie terminé, vous avez eu un score de : " + document.getElementById("Score").textContent);
     location.reload(true);
 }
+
+creationBalle();
+creationJoueur();
