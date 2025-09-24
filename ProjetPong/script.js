@@ -46,28 +46,37 @@ document.addEventListener('keyup', (event) => {
 const balle ={
     x : 0.5 * canvas.width ,
     y : 0.1 * canvas.height,
-    taille : 10,
-    dx : Math.random() < 0.5 ? 2 : -2,
-    dy : Math.random() < 0.5 ? 2 : -2,
+    taille : 15,
+    dx : 2,
+    dy : -2,
 };
 const joueur ={
     x : 0.40 * canvas.width,  
     y : 0.95 * canvas.height,
     rayon : canvas.width / 5,
-    taille : 10,
+    taille : 5,
+}
+
+function randomPourLesDirections(){
+    if (Math.random() < 0.5) {
+        return Math.random() * (1) - 3; 
+    } else {
+        return Math.random() * (1) + 2;
+    }
 }
 
 function restart(){
     document.getElementById("Score").textContent = 0;
+    balle.x = 0.5 * canvas.width;
+    balle.y = 0.1 * canvas.height;
+    balle.dx = randomPourLesDirections();
+    balle.dy = randomPourLesDirections();
     if (!secondLancement) {
         timer();
         dessineTout();
         secondLancement = true;
     }
-    balle.x = 0.5 * canvas.width;
-    balle.y = 0.1 * canvas.height;
-    balle.dx = Math.random() < 0.5 ? 3 : -3;
-    balle.dy = Math.random() < 0.5 ? 3 : -3;
+    
 }
 
 function timer(){
@@ -82,7 +91,7 @@ function creationBalle(){
     // création de la balle
     ctx.fillStyle = "white";
     ctx.beginPath();
-    ctx.arc(balle.x, balle.y, 15, 0, 2 * Math.PI);
+    ctx.arc(balle.x, balle.y, balle.taille, 0, 2 * Math.PI);
     ctx.fill();
     ctx.closePath();
 }
@@ -90,11 +99,23 @@ function creationBalle(){
 function dessineBalle(){
     creationBalle();
     if(balle.x + balle.dx > canvas.width-balle.taille || balle.x + balle.dx < balle.taille) {
-        balle.dx = -balle.dx + 0.5;
+        balle.dx = -balle.dx;
+        if (balle.dx < 0){
+            balle.dx -= 0.25;
+        }
+        else {
+            balle.dx += 0.25;
+        }
         balle.dy = balle.dy * (Math.random() * (1.10 - 0.90) + 0.90);
     }
-    if(balle.y + balle.dy < balle.taille || (balle.y + balle.taille > joueur.y - joueur.taille / 2) && (balle.x > joueur.x) && (balle.x < joueur.x + joueur.rayon)) {
-        balle.dy = -balle.dy + 0.5 ;
+    if(balle.y + balle.dy < balle.taille || (balle.y + balle.taille > joueur.y - joueur.taille / 2) && (balle.x >= joueur.x) && (balle.x <= joueur.x + joueur.rayon)) {
+        balle.dy = -balle.dy
+        if (balle.dy < 0){
+            balle.dy -= 0.25;
+        }
+        else {
+            balle.dy += 0.25;
+        }
         balle.dx = balle.dx * (Math.random() * (1.10 - 0.90) + 0.90);
     }
     else if (balle.y + balle.dy > canvas.height-balle.taille) {
@@ -123,10 +144,10 @@ function dessineJoueur(){
 function dessineTout(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if (leftPressed && joueur.x > 0) {
-        joueur.x -= 5;
+        joueur.x -= 7.5;
     }
     if (rightPressed && joueur.x + joueur.rayon < canvas.width) {
-        joueur.x += 5;
+        joueur.x += 7.5;
     }
     dessineBalle();
     dessineJoueur();
