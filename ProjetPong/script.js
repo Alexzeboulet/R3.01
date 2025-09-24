@@ -25,6 +25,20 @@ document.getElementById("flecheDroite").addEventListener("mouseup", (event) => {
     rightPressed = false
 });
 
+document.getElementById("flecheGauche").addEventListener("touchstart", (event) => {
+    leftPressed = true;
+});
+document.getElementById("flecheGauche").addEventListener("touchend", (event) => {
+    leftPressed = false;
+});
+
+document.getElementById("flecheDroite").addEventListener("touchstart", (event) => {
+    rightPressed = true;
+});
+document.getElementById("flecheDroite").addEventListener("touchend", (event) => {
+    rightPressed = false;
+});
+
 
 document.addEventListener('keydown', (event) => {
     if(event.key === "ArrowLeft"){
