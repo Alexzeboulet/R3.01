@@ -27,3 +27,18 @@ button {
     transition: all 0.3s ease;
     box-shadow: 0 0 8px #00ffc8;
 }
+
+h2, h3 {
+    display: inline-block;
+    margin: 0 15px;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 5px #00ffc8;
+    color: black;
+    text-align: center;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
