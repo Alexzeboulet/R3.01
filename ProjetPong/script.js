@@ -66,7 +66,7 @@ const balle ={
 };
 const joueur ={
     x : 0.40 * canvas.width,  
-    y : 0.95 * canvas.height,
+    y : 0.98 * canvas.height,
     rayon : canvas.width / 5,
     taille : 5,
 }
