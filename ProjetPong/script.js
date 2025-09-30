@@ -172,12 +172,12 @@ function end(){
     alert("Partie terminé, vous avez eu un score de : " + document.getElementById("Score").textContent);
     if (parseInt(document.getElementById("Score").textContent) > parseInt(localStorage.getItem("bestScore"))) {
         localStorage.setItem("bestScore", document.getElementById("Score").textContent);
-        document.getElementById("bestScore").textContent = localStorage.getItem("bestScore");
+        document.getElementById("bestScore").textContent = parseInt(localStorage.getItem("bestScore"));
     }
     location.reload(true);
 }
 
-if (document.getElementById("bestScore").textContent === null){
+if (localStorage.getItem("bestScore") === null){
     localStorage.setItem("bestScore", 0);
 }
 document.getElementById("bestScore").textContent = localStorage.getItem("bestScore");
